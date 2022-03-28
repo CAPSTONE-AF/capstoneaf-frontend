@@ -1,0 +1,57 @@
+<div class="page-wrapper chiller-theme toggled">
+  <nav id="sidebar" class="sidebar-wrapper">
+    <div class="sidebar-content">
+      <div class="sidebar-brand">
+        <a>APRENDO EN WEB</a>
+          <div class="card mb-2">
+                <button (click)="onLogOut()" class="btn btn-outline-danger">
+                  <span>Logout</span>
+                  <i class="fas fa-sign-out-alt ml-1"></i>
+                </button>
+          </div>
+      </div>
+      <div class="sidebar-header">
+        <div class="user-pic">
+          <img class="img-responsive img-rounded" src="{{user?.profileImageUrl}}"
+            alt="User picture">
+        </div>
+        <div class="user-info">
+          <span class="user-name">{{user?.firstName}}
+            <strong>{{user?.lastName}}</strong>
+          </span>
+          <span class="user-role">{{user?.role}}</span>
+          <span class="user-status">
+            <i class="fa fa-circle"></i>
+            <span>Online</span>
+          </span>
+        </div>
+      </div>
+      <div class="sidebar-menu">
+        <ul>
+          <li class="header-menu">
+            <span>Funciones</span>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="/editProfile">
+              <i class="fas fa-user-edit"></i>
+              <span>Editar Perfil</span>
+            </a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="/user/management">
+              <i class="fas fa-address-book"></i>
+              <span>Gestionar Usuarios</span>
+            </a>
+          </li>
+          <li class="sidebar-dropdown">
+            <a href="/curso/management">
+              <i class="fas fa-book"></i>
+              <span>Administrar Cursos</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div style="margin-left:340px;margin-right:40px">
+  <router-outlet></router-outlet>

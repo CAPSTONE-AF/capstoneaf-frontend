@@ -1,0 +1,109 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Administración Cursos</h4>
+                    <br>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addCursoModal">
+                      <i class="fa fa-plus"></i> Agregar Curso
+                    </button>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" id="proTeamScroll" tabindex="2" style="height: 400px; overflow: hidden; outline: none;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Curso</th>
+                                    <th>N° Temas</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let tempCurso of cursos">
+                                    <td align ="center">{{ tempCurso.idCurso }}</td>
+                                    <td align ="center"><strong>{{ tempCurso.nombre }}</strong></td>
+                                    <td align ="center" >{{ tempCurso.cantTemas }}</td>
+                                    <td align ="center">
+                                    <button class="btn btn-outline-info" (click)="onEditCurso(tempCurso)"><i class="fas fa-edit"></i></button>&nbsp;
+                                    <button class="btn btn-outline-success" (click)="onManageTemas(tempCurso?.nombre)"><i class="fas fa-book"></i></button>&nbsp;
+                                    <button class="btn btn-outline-danger" (click)="onDeleteCurso(tempCurso?.nombre)"><i class="fas fa-trash"></i></button>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+
+                    <button [hidden]="true" type="button" id="openCursoEdit" data-toggle="modal" data-target="#editCursoModal">
+                    </button>
+            
+                         <!-- modal edit Tema -->
+              <div class="modal draggable fade bd-example-modal-lg" id="editCursoModal" tabindex="-1"
+              role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+              <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title text-center">Editar Curso: {{editCurso?.nombre}}</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="">
+                      <form #editCursoForm="ngForm">
+                        <div class="form-group">
+                          <label for="nombre">Nombre</label>
+                          <input type="text" name="nombre" required
+                            [(ngModel)]="editCurso.nombre" class="form-control">
+                        </div>
+                      </form>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeEditCursoModalButton">Cerrar</button>
+                    <button type="button" (click)="onUpdateCurso()" [disabled]="editCursoForm.invalid" class="btn btn-primary">Guardar cambios</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- model add curso -->
+    <div class="modal draggable fade bd-example-modal-lg" id="addCursoModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center">Nuevo Curso</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <form #newCursoForm="ngForm" (ngSubmit)="onAddNewCurso(newCursoForm)">
+              <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" name="nombre" required ngModel class="form-control">
+              </div>
+              <button type="submit" style="display: none;" id="new-curso-save"></button>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="new-curso-close">Cerrar</button>
+          <button type="button" (click)="saveNewCurso()" [disabled]="newCursoForm.invalid" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+    </div>
+</div>
+
+
+

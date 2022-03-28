@@ -1,0 +1,151 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12">
+            <div class="card">
+                    <button (click)="onRegresar()" class="goback"><i class="fa fa-arrow-circle-left"></i> Regresar a Cursos</button>
+                <div class="card-header">
+                    <h4>Temas de: {{nombreCurso}}</h4><br>
+                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addTemaModal">
+                        <i class="fa fa-plus"></i> Agregar Tema
+                      </button>
+                </div>
+                <div class="card-body">
+                    <div class="file_manager">
+                        <div class="container">
+                        <div class="row clearfix" >
+                            <div class="col-lg-2 col-md-4 col-sm-12" *ngFor="let tempTema of temas">
+                                <div class="cardxd">
+                                    <div class="file">
+                                        <div><br><h5 align = "center">{{ tempTema.titulo }}</h5>
+                                        <div class="image" align = "center">
+                                            <img src="{{tempTema?.portadaUrl}}" alt="img" class="img-fluid">
+                                        </div><br>
+                                        <div align = "center">
+                                            <a href="javascript:void(0);" class="btn btn-info" data-placement="top" 
+                                            data-toggle="tooltip" data-original-title="OpenResources" (click)="onManageRecursos(tempTema?.titulo)"><i class="fa fa-paperclip"></i></a>&nbsp;
+                                            <a class="btn btn-warning" data-placement="top" 
+                                                data-toggle="tooltip" data-original-title="Edit" (click)="onEditTema(tempTema)"><i class="fa fa-pencil"></i> </a>&nbsp;
+                                            <a href="javascript:void(0);" class="btn btn-danger" data-placement="top" 
+                                                data-toggle="tooltip" data-original-title="Delete" (click)="onDeleteTema(tempTema?.titulo)"><i class="fa fa-trash-o"></i></a>
+                                                                                   
+                                        </div><br>
+                                        </div>
+                                    </div>
+                                </div>              
+                            </div>          
+                        </div>
+                        </div>
+                        </div>
+
+
+                        <button [hidden]="true" type="button" id="openTemaEdit" data-toggle="modal" data-target="#editTemaModal">
+                        </button>
+                
+                             <!-- modal edit Tema -->
+                  <div class="modal draggable fade bd-example-modal-lg" id="editTemaModal" tabindex="-1"
+                  role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h5 class="modal-title text-center">Editar Tema: {{editTema?.titulo}}</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true">&times;</span>
+                        </button>
+                      </div>
+                      <div class="modal-body">
+                        <div class="">
+                          <form #editTemaForm="ngForm">
+                            <div class="form-group">
+                              <label for="titulo">Título</label>
+                              <input type="text" name="titulo" required
+                                [(ngModel)]="editTema.titulo" class="form-control">
+                            </div>
+                            <div class="input-group mb-2">
+                              <div class="input-group-prepend">
+                                <span class="input-group-text">Foto de Portada </span>
+                              </div>
+                              <div class="custom-file">
+                                <input type="file" accept="image/*" name="portadaUrl"
+                                  (change)="onPortadaImageChange($event.target.files[0].name, $event.target.files[0])"
+                                  class="custom-file-input">
+                                <label class="custom-file-label"><span [hidden]="!fileName">{{fileName}}</span>
+                                  <span [hidden]="fileName">Seleccionar Portada</span>
+                                </label>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                      <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeEditTemaModalButton">Cerrar</button>
+                        <button type="button" (click)="onUpdateTema()" [disabled]="editTemaForm.invalid" class="btn btn-primary">Guardar cambios</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                
+
+                <!-- model add tema -->
+    <div class="modal draggable fade bd-example-modal-lg" id="addTemaModal" tabindex="-1" role="dialog"
+    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title text-center">Nuevo Tema</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <div>
+            <form #newTemaForm="ngForm" (ngSubmit)="onAddNewTema(newTemaForm)">
+              <div class="form-group">
+                <label for="titulo">Título</label>
+                <input type="text" name="titulo" required ngModel class="form-control">
+              </div>
+              <div class="input-group mb-2">
+                <div class="input-group-prepend">
+                  <span class="input-group-text">Foto de Portada </span>
+                </div>
+                <div class="custom-file">
+                  <input type="file" accept="image/*" name="portadaUrl"
+                  (change)="onPortadaImageChange($event.target.files[0].name, $event.target.files[0])"
+                    class="custom-file-input">
+                  <label class="custom-file-label"><span [hidden]="!fileName">{{ fileName }}</span>
+                    <span [hidden]="fileName">Seleccionar Foto</span>
+                  </label>
+                </div>
+              </div>
+              <button type="submit" style="display: none;" id="new-tema-save"></button>
+            </form>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="new-tema-close">Cerrar</button>
+          <button type="button" (click)="saveNewTema()" [disabled]="newTemaForm.invalid" class="btn btn-primary">Guardar</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+
+
