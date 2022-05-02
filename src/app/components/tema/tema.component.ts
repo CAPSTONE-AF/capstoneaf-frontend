@@ -1,12 +1,13 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Curso } from 'src/app/common/curso';
 import { CustomHttpResponse } from 'src/app/common/custom-http-response';
 import { Tema } from 'src/app/common/tema';
+import { User } from 'src/app/common/user';
 import { NotificationType } from 'src/app/enum/notification-type.enum';
-import { CursoService } from 'src/app/service/curso.service';
+import { AuthenticationService } from 'src/app/service/authentication.service';
 import { NotificationService } from 'src/app/service/notification.service';
 import { TemaService } from 'src/app/service/tema.service';
 
@@ -24,11 +25,13 @@ export class TemaComponent implements OnInit {
   public fileName: string;
   public portadaUrl: File;
   public nombreCurso: any;
+  public user: User;
 
   constructor(private temaService: TemaService,private route:ActivatedRoute,private router:Router,
-    private notificationService: NotificationService) { }
+    private notificationService: NotificationService,private authenticationService: AuthenticationService) { }
 
   ngOnInit(): void {
+    this.user = this.authenticationService.getUserFromLocalCache();
     this.route.queryParams
       .subscribe(params => {
         this.nombreCurso = params.nombreCurso;
@@ -59,8 +62,9 @@ public saveNewTema(): void {
 }
 
 public onAddNewTema(temaForm: NgForm): void {
-  const formData = this.temaService.createTemaFormDate(this.nombreCurso, null, temaForm.value, this.portadaUrl);
-    this.temaService.addTema(formData).subscribe(
+  console.log(this.user);
+  const formData = this.temaService.createTemaFormDate(this.nombreCurso, null, temaForm.value, this.portadaUrl,this.user.id);
+  this.temaService.addTema(formData).subscribe(
       (response: Tema) => {
         this.clickButton('new-tema-close');
         this.getTemas(this.nombreCurso,false);
@@ -79,7 +83,7 @@ public onAddNewTema(temaForm: NgForm): void {
 
 
 public onUpdateTema(): void {
-  const formData = this.temaService.createTemaFormDate(this.nombreCurso,this.currentTitulo, this.editTema, this.portadaUrl);
+  const formData = this.temaService.createTemaFormDate(this.nombreCurso,this.currentTitulo, this.editTema, this.portadaUrl,this.user.id);
     this.temaService.updateTema(formData).subscribe(
       (response: Tema) => {
         this.clickButton('closeEditTemaModalButton');
