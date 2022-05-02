@@ -34,11 +34,11 @@ export class CursoService {
     
   }
 
-  public createCursoFormDate(currentNombre: string, curso: Curso): FormData {
+  public createCursoFormDate(currentNombre: string, curso: Curso, id:bigint): FormData {
     const formData = new FormData();
     formData.append('currentNombre', currentNombre);
     formData.append('nombre', curso.nombre);
+    formData.append('idUser', id.toString());
     return formData;
   }
-
 }
