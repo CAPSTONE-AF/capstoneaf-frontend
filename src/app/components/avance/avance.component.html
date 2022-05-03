@@ -1,0 +1,30 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Historial</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" id="proTeamScroll" tabindex="2" style="height: 400px; overflow: hidden; outline: none;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Fecha</th>
+                                    <th>Tema</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let tempAvance of avances">
+                                    <td align ="center"><strong>{{ tempAvance.fechaCreacion | date:'dd/MM/yyyy hh:mm a'}}</strong></td>
+                                    <td align ="center" >{{ tempAvance.tema.titulo }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+    </div>
+</div>
+
+
+

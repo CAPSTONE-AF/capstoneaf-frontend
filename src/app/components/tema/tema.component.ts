@@ -127,9 +127,9 @@ public onDeleteTema(titulo: string,): void {
   );
 }
 
-public onManageRecursos(tituloTema: string): void {
+public onManageRecursos(idTema: string): void {
   this.router.navigate(['/recurso/management'],{
-    queryParams: { 'nombreCurso': this.nombreCurso, 'tituloTema': tituloTema}
+    queryParams: { 'nombreCurso': this.nombreCurso, 'idTema': idTema}
   });
 }
 

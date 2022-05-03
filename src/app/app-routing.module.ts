@@ -1,3 +1,4 @@
+import { AvanceComponent } from './components/avance/avance.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './components/login/login.component';
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'curso/management', component: CursoComponent, canActivate: [AuthenticationGuard]},
+  { path: 'avance/management', component: AvanceComponent, canActivate: [AuthenticationGuard]},
   { path: 'editProfile', component: EditProfileComponent, canActivate: [AuthenticationGuard] },
   { path: 'tema/management', component: TemaComponent, canActivate: [AuthenticationGuard] },
   { path: 'recurso/management', component: RecursoComponent, canActivate: [AuthenticationGuard] },
