@@ -41,7 +41,7 @@ export class TemaService {
     return this.http.delete<CustomHttpResponse>(`${this.host}/tema/delete/${nombreCurso}/${titulo}`);
   }
 
-  public createTemaFormDate(nombreCurso: string, currentTitulo: string,tema: Tema, portadaUrl: File,id:bigint): FormData {
+  public createTemaFormDate(nombreCurso: string, currentTitulo: string,tema: Tema, portadaUrl: File, id:bigint): FormData {
     const formData = new FormData();
     formData.append('nombreCurso', nombreCurso);
     formData.append('currentTitulo', currentTitulo);

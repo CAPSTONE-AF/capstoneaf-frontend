@@ -31,7 +31,7 @@ export class CursoService {
 
   public findCurso(nombreCurso: string): Observable<Curso> {
     return this.http.get<Curso>(`${this.host}/curso/find/${nombreCurso}`);
-    
+
   }
 
   public createCursoFormDate(currentNombre: string, curso: Curso, id:bigint): FormData {

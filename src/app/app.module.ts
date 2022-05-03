@@ -41,7 +41,7 @@ import { DatePipe } from '@angular/common';
     HttpClientModule,
     NotificationModule
   ],
-  providers: [NotificationService, AuthenticationGuard, AuthenticationService, , DatePipe, UserService,
+  providers: [NotificationService, AuthenticationGuard, AuthenticationService, DatePipe, UserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],
   bootstrap: [AppComponent]
 })
