@@ -14,6 +14,8 @@ export class User {
     public role: string;
     public authorities: [];
 
+    public id:bigint;
+  
     constructor() {
       this.userId = '';
       this.firstName = '';
