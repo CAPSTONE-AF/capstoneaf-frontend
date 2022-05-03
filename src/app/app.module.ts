@@ -19,7 +19,8 @@ import { EditProfileComponent } from './components/edit-profile/edit-profile.com
 import { CursoComponent } from './components/curso/curso.component';
 import { TemaComponent } from './components/tema/tema.component';
 import { RecursoComponent } from './components/recurso/recurso.component';
-
+import { AvanceComponent } from './components/avance/avance.component';
+import { DatePipe } from '@angular/common';
 @NgModule({
   declarations: [
     AppComponent,
@@ -30,7 +31,8 @@ import { RecursoComponent } from './components/recurso/recurso.component';
     EditProfileComponent,
     CursoComponent,
     TemaComponent,
-    RecursoComponent
+    RecursoComponent,
+    AvanceComponent
   ],
   imports: [
     BrowserModule,
@@ -39,7 +41,7 @@ import { RecursoComponent } from './components/recurso/recurso.component';
     HttpClientModule,
     NotificationModule
   ],
-  providers: [NotificationService, AuthenticationGuard, AuthenticationService, UserService,
+  providers: [NotificationService, AuthenticationGuard, AuthenticationService, , DatePipe, UserService,
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true } ],
   bootstrap: [AppComponent]
 })

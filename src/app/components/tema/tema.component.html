@@ -22,18 +22,18 @@
                                             <img src="{{tempTema?.portadaUrl}}" alt="img" class="img-fluid">
                                         </div><br>
                                         <div align = "center">
-                                            <a href="javascript:void(0);" class="btn btn-info" data-placement="top" 
-                                            data-toggle="tooltip" data-original-title="OpenResources" (click)="onManageRecursos(tempTema?.titulo)"><i class="fa fa-paperclip"></i></a>&nbsp;
-                                            <a class="btn btn-warning" data-placement="top" 
+                                            <a href="javascript:void(0);" class="btn btn-info" data-placement="top"
+                                            data-toggle="tooltip" data-original-title="OpenResources" (click)="onManageRecursos(tempTema?.idTema)"><i class="fa fa-paperclip"></i></a>&nbsp;
+                                            <a class="btn btn-warning" data-placement="top"
                                                 data-toggle="tooltip" data-original-title="Edit" (click)="onEditTema(tempTema)"><i class="fa fa-pencil"></i> </a>&nbsp;
-                                            <a href="javascript:void(0);" class="btn btn-danger" data-placement="top" 
+                                            <a href="javascript:void(0);" class="btn btn-danger" data-placement="top"
                                                 data-toggle="tooltip" data-original-title="Delete" (click)="onDeleteTema(tempTema?.titulo)"><i class="fa fa-trash-o"></i></a>
-                                                                                   
+
                                         </div><br>
                                         </div>
                                     </div>
-                                </div>              
-                            </div>          
+                                </div>
+                            </div>
                         </div>
                         </div>
                         </div>
@@ -41,7 +41,7 @@
 
                         <button [hidden]="true" type="button" id="openTemaEdit" data-toggle="modal" data-target="#editTemaModal">
                         </button>
-                
+
                              <!-- modal edit Tema -->
                   <div class="modal draggable fade bd-example-modal-lg" id="editTemaModal" tabindex="-1"
                   role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -84,7 +84,7 @@
                     </div>
                   </div>
                 </div>
-                
+
 
                 <!-- model add tema -->
     <div class="modal draggable fade bd-example-modal-lg" id="addTemaModal" tabindex="-1" role="dialog"

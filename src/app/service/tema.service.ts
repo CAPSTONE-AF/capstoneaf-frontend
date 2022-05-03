@@ -14,9 +14,12 @@ export class TemaService {
 
   constructor(private http: HttpClient) { }
 
-
   public getTemas(nombreCurso: string): Observable<Tema[]> {
     return this.http.get<Tema[]>(`${this.host}/tema/list/${nombreCurso}`);
+  }
+
+  public getTemaById(idTema: bigint): Observable<Tema> {
+    return this.http.get<Tema>(`${this.host}/tema/find/${idTema}`);
   }
 
   public addTema(formData: FormData): Observable<Tema> {

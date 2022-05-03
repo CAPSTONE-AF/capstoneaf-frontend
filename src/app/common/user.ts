@@ -1,4 +1,5 @@
 export class User {
+    public id: bigint;
     public userId: string;
     public firstName: string;
     public lastName: string;
@@ -12,7 +13,7 @@ export class User {
     public notLocked: boolean;
     public role: string;
     public authorities: [];
-  
+
     constructor() {
       this.userId = '';
       this.firstName = '';
@@ -27,7 +28,7 @@ export class User {
       this.notLocked = false;
       this.role = '';
       this.authorities = [];
+      this.id = null;
     }
-  
+
   }
-  
