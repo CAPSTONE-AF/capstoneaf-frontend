@@ -66,7 +66,7 @@ export class RecursoComponent implements OnInit {
   }
 
   registrarAvance() {
-    this.avanceService.registerAvance(new AvanceDto(this.user.id.toString(), this.tema.idTema.toString())).subscribe();
+    this.avanceService.registerAvance(new AvanceDto(this.user.id, this.tema.idTema)).subscribe();
   }
 
   public onRegresar(): void {

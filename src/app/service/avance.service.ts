@@ -13,8 +13,8 @@ export class AvanceService {
 
   constructor(private http: HttpClient) {}
 
-  public getAllAvancesByUserId(userId: bigint): Observable<Avance[]> {
-    return this.http.get<Avance[]>(`${this.host}/avances/list/${userId}`);
+  public getAllAvancesByUserId(userId: bigint): Observable<AvanceDto[]> {
+    return this.http.get<AvanceDto[]>(`${this.host}/avances/list/${userId}`);
   }
 
   public registerAvance(avanceDto: AvanceDto): Observable<Object> {

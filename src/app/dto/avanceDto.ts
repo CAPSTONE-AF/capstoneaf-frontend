@@ -1,8 +1,10 @@
 export class AvanceDto {
-  idUser: string;
-  idTema: string;
+  idAvance: bigint;
+  idUser: bigint;
+  idTema: bigint;
+  fechaCreacion: Date;
 
-  constructor(idUser: string, idTema: string) {
+  constructor(idUser: bigint, idTema: bigint) {
     this.idUser = idUser;
     this.idTema = idTema;
   }

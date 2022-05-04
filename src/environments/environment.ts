@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://capstone-pruebas.herokuapp.com'
+  apiUrl: 'http://localhost:9090'
 };
 
 /*
