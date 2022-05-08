@@ -25,6 +25,10 @@ export class CursoService {
     return this.http.post<Curso>(`${this.host}/curso/update`, formData);
   }
 
+  public exportarPieChartPopCursos(): Observable<Blob> {
+    return this.http.get<Blob>(`${this.host}/curso/exportar/piechart/pop_cursos/pdf`);
+  }
+
   public deleteCurso(nombre: string): Observable<CustomHttpResponse> {
     return this.http.delete<CustomHttpResponse>(`${this.host}/curso/delete/${nombre}`);
   }

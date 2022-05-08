@@ -55,10 +55,16 @@
               <span>Historial</span>
             </a>
           </li>
+          <li class="sidebar-dropdown">
+            <a href="/estadisticas/management">
+              <i class="fas fa-book"></i>
+              <span>Estadísticas</span>
+            </a>
+          </li>
         </ul>
       </div>
     </div>
   </nav>
   </div>
-  <div style="margin-left:340px;margin-right:40px" *ngIf="user!==null">
+  <div style="margin-left:340px;margin-right:40px; margin-top: 5%;" *ngIf="user!==null">
   <router-outlet></router-outlet>

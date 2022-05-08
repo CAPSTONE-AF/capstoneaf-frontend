@@ -1,0 +1,51 @@
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12">
+      <div class="card">
+        <div class="card-header">
+          <h4>Estadísticas</h4>
+          <br />
+        </div>
+        <div class="card-body">
+          <div
+            class="table-responsive"
+            id="proTeamScroll"
+            tabindex="2"
+            style="height: 400px; overflow: hidden; outline: none"
+          >
+            <table>
+              <tr>
+                <th>
+                  <img width="525px" height="325px" src="{{ barChartImage }}" />
+                </th>
+                <th>
+                  <img width="530px" height="325px" src="{{ pieChartImage }}" />
+                </th>
+              </tr>
+              <tr>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+              </tr>
+              <tr>
+                <td style="text-align: center">
+                  <a
+                    class="exportarButton"
+                    (click)="exportarBarChartNumUsuByGrado()"
+                    >EXPORTAR BAR CHART A PDF</a
+                  >
+                </td>
+                <td style="text-align: center">
+                  <a
+                    class="exportarButton"
+                    (click)="exportarPieChartPopCursos()"
+                    >EXPORTAR PIE CHART A PDF</a
+                  >
+                </td>
+              </tr>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

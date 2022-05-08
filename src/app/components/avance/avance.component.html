@@ -17,7 +17,7 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let tempAvance of avances">
-                                    <td align ="center"><strong>{{ tempAvance.fechaCreacion | date:'dd/MM/yyyy hh:mm a'}}</strong></td>
+                                    <td align ="center"><strong>{{ tempAvance.fechaCreacion | date:'dd/MM/yyyy hh:mm:ss a'}}</strong></td>
                                     <td align ="center" >{{ tempAvance.tema.titulo }}</td>
                                 </tr>
                             </tbody>

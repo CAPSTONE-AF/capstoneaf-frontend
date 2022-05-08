@@ -32,13 +32,14 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.showLoading = true;
     this.subscriptions.push(
       this.authenticationService.login(user).subscribe(
-        (response: HttpResponse<User>) => {
+        async (response: HttpResponse<User>) => {
           const token = response.headers.get(HeaderType.JWT_TOKEN);
           this.authenticationService.saveToken(token);
           this.authenticationService.addUserToLocalCache(response.body);
+          window.location.reload();
+          await this.delay(90000);
           this.router.navigateByUrl('/user/management');
           this.showLoading = false;
-          window.location.reload();
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendErrorNotification(NotificationType.ERROR, errorResponse.error.message )
@@ -53,6 +54,10 @@ export class LoginComponent implements OnInit, OnDestroy{
     } else{
       this.notificationService.notify(notificationType,`Ha ocurrido un error. Intente de nuevo`);
     }
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
   ngOnDestroy(): void{

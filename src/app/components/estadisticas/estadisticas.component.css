@@ -1,0 +1,177 @@
+
+
+.card {
+  background-color: #fff;
+  border-radius: 10px;
+  border: none;
+  position: relative;
+  margin-bottom: 30px;
+  box-shadow: 0 0.46875rem 2.1875rem rgba(90,97,105,0.1), 0 0.9375rem 1.40625rem rgba(90,97,105,0.1), 0 0.25rem 0.53125rem rgba(90,97,105,0.12), 0 0.125rem 0.1875rem rgba(90,97,105,0.1);
+}
+
+.card .card-header {
+  border-bottom-color: #f9f9f9;
+  text-align: right;
+  line-height: 30px;
+  -ms-grid-row-align: center;
+  align-self: center;
+  width: 100%;
+  padding: 10px 25px;
+  align-items: center;
+}
+
+.card .card-header, .card .card-body, .card .card-footer {
+  background-color: transparent;
+  padding: 20px 25px;
+}
+.card-header:first-child {
+  border-radius: calc(.25rem - 1px) calc(.25rem - 1px) 0 0;
+}
+.card-header {
+  padding: .75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0,0,0,.03);
+  border-bottom: 1px solid rgba(0,0,0,.125);
+}
+
+.table:not(.table-sm) thead th {
+  border-bottom: none;
+  background-color: #2d2d7e;
+  color: rgb(236, 235, 235);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  text-align: center;
+}
+
+body{
+  background-color: #f4f7f6;
+  margin-top:10px;
+}
+.file_manager .file a:hover .hover,
+.file_manager .file .file-name small{
+  display: block
+}
+.file_manager .file {
+  padding: 0 !important
+}
+
+.file_manager .file .icon{
+  text-align: center
+}
+
+
+.file_manager .file {
+  position: relative;
+  border-radius: .55rem;
+  overflow: hidden
+}
+
+.file_manager .file .image,
+.file_manager .file .icon {
+  max-height: 180px;
+  overflow: hidden;
+  background-size: cover;
+  background-position: top
+}
+
+.file_manager .file .hover {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  display: none;
+  transition: all 0.2s ease-in-out
+}
+
+.file_manager .file a:hover .hover {
+  transition: all 0.2s ease-in-out
+}
+
+.file_manager .file .icon {
+  padding: 15px 10px;
+  display: table;
+  width: 100%
+}
+
+.file_manager .file .icon i {
+  display: table-cell;
+  font-size: 30px;
+  vertical-align: middle;
+  color: #777;
+  line-height: 100px
+}
+
+.file_manager .file .file-name {
+  padding: 10px;
+  border-top: 1px solid #f7f7f7
+}
+
+.file_manager .file .file-name small .date {
+  float: right
+}
+
+.folder {
+  padding: 20px;
+  display: block;
+  color: #777
+}
+
+@media only screen and (max-width: 992px) {
+  .file_manager .nav-tabs {
+      padding-left: 0;
+      padding-right: 0
+  }
+  .file_manager .nav-tabs .nav-item {
+      display: inline-block
+  }
+}
+
+.cardTema {
+  background: #fff;
+  transition: .5s;
+  border: 0;
+  margin-bottom: 30px;
+  border-radius: .55rem;
+  position: relative;
+  width: 100%;
+  box-shadow: 0 1px 2px 0 rgb(0 0 0 / 10%);
+}
+
+a:hover {
+  text-decoration:none;
+}
+
+.exportarButton {
+  font-size: 1.1rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 13px;
+  margin-left: 10px;
+  width: 10rem;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: rgb(121, 162, 250);
+  height: 5rem;
+}
+
+.exportarButton:hover {
+  font-size: 1.1rem;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 10px;
+  padding-right: 13px;
+  margin-left: 10px;
+  width: 10rem;
+  text-align: center;
+  cursor: pointer;
+  font-weight: bold;
+  border: 2px solid #000000;
+  border-radius: 5px;
+  color: #ffffff;
+  background-color: rgb(0, 81, 255);
+  height: 5rem;
+}

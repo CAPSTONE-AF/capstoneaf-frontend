@@ -20,10 +20,11 @@ export class SidebarComponent implements OnInit {
     this.user = this.authenticationService.getUserFromLocalCache();
   }
 
-  public onLogOut(): void {
+  async onLogOut(): Promise<void>  {
     this.authenticationService.logOut();
-    this.router.navigate(['/login']);
     window.location.reload();
+    await this.delay(100);
+    this.router.navigate(['/login']);
     this.sendNotification(NotificationType.SUCCESS, `Se ha desconectado con éxito.`);
   }
 
@@ -33,6 +34,10 @@ export class SidebarComponent implements OnInit {
     } else {
       this.notificationService.notify(notificationType, 'Ocurrió un error. Inténtalo de nuevo.');
     }
+  }
+
+  delay(ms: number) {
+    return new Promise( resolve => setTimeout(resolve, ms) );
   }
 
 }

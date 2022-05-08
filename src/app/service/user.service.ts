@@ -34,6 +34,10 @@ export class UserService {
     });
   }
 
+  public exportarBarChartNumUsuByGrado(): Observable<Blob> {
+    return this.http.get<Blob>(`${this.host}/user/exportar/barchart/num_usu_grado/pdf`);
+  }
+
   public deleteUser(username: string): Observable<CustomHttpResponse> {
     return this.http.delete<CustomHttpResponse>(`${this.host}/user/delete/${username}`);
   }

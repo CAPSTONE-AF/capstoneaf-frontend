@@ -21,6 +21,7 @@ import { TemaComponent } from './components/tema/tema.component';
 import { RecursoComponent } from './components/recurso/recurso.component';
 import { AvanceComponent } from './components/avance/avance.component';
 import { DatePipe } from '@angular/common';
+import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +33,8 @@ import { DatePipe } from '@angular/common';
     CursoComponent,
     TemaComponent,
     RecursoComponent,
-    AvanceComponent
+    AvanceComponent,
+    EstadisticasComponent
   ],
   imports: [
     BrowserModule,
