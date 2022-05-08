@@ -23,7 +23,7 @@ export class SidebarComponent implements OnInit {
   async onLogOut(): Promise<void>  {
     this.authenticationService.logOut();
     window.location.reload();
-    await this.delay(100);
+    await this.delay(500);
     this.router.navigate(['/login']);
     this.sendNotification(NotificationType.SUCCESS, `Se ha desconectado con éxito.`);
   }
