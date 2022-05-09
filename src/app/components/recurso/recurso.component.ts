@@ -97,6 +97,7 @@ export class RecursoComponent implements OnInit {
           recurso.idRecurso = responseTemp.idRecurso;
           recurso.nombre = responseTemp.nombre;
           recurso.tipo = responseTemp.tipo;
+          recurso.contenido = responseTemp.contenido;
           recurso.contenidoSS = this._sanitizer.bypassSecurityTrustResourceUrl(responseTemp.contenido);
           this.recursos.push(recurso);
         }

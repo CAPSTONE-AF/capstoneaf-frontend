@@ -23,10 +23,11 @@
                                             <div class="col-md-12">
                                                 <h5>{{ tempRecurso?.nombre }}</h5>
                                                 <span><strong>Tipo: </strong></span> <span class="label label-info">{{tempRecurso?.tipo}}</span><br />
-                                                <strong>Contenido:</strong>  {{tempRecurso?.contenidow}}<br /><br>
-                                                <p>
-                                                  <iframe width="560" height="315" [src]="tempRecurso?.contenidoSS" [frameBorder]="0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                                                </p>
+                                                <strong>Contenido:</strong><br><br>
+                                                <p *ngIf="tempRecurso?.tipo === 'texto'">{{tempRecurso?.contenido}}<br /><br></p>
+                                                <iframe width="70%" height="315" [src]="tempRecurso?.contenidoSS" [frameBorder]="0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen *ngIf="tempRecurso?.tipo === 'video'"></iframe>
+                                                <img *ngIf="tempRecurso?.tipo === 'imagen'" src={{tempRecurso?.contenido}} />
+                                                <br><br>
                                                 <button class="btn btn-success btn-sm" title="Edit" (click)="onEditRecurso(tempRecurso)"><i class="fas fa-edit"></i></button>&nbsp;
                                                 <button class="btn btn-danger btn-sm" title="Delete" (click)="onDeleteRecurso(tempRecurso?.nombre)"><i class="fas fa-trash"></i></button>
                                             </div>
@@ -69,17 +70,10 @@
                                     <textarea name="contenido" rows="10" cols="40"required ngModel class="form-control">Escribe aquí el texto</textarea>
                                 </ng-container>
                                 <ng-container *ngIf="optionValue == 'imagen'">
-                                <div class="custom-file">
-                                    <input type="file" accept="image/*" name="contenido"
-                                      (change)="oContenidoImageChange($event.target.files[0].name, $event.target.files[0])"
-                                      class="custom-file-input">
-                                    <label class="custom-file-label"><span [hidden]="!fileName">{{fileName}}</span>
-                                      <span [hidden]="fileName">Seleccionar Imagen</span>
-                                    </label>
-                                  </div>
+                                  <input type="text" name="contenido" required ngModel class="form-control" placeholder="Ingrese link de la imagen">
                                 </ng-container>
                                 <ng-container *ngIf="optionValue == 'video'">
-                                    <input type="text" name="contenido" required ngModel class="form-control">
+                                    <input type="text" name="contenido" required ngModel class="form-control" placeholder="Ingrese link del video">
                                 </ng-container>
 
                             </div>
