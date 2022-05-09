@@ -5,7 +5,7 @@ import { AvanceService } from './../../service/avance.service';
 import { TemaService } from 'src/app/service/tema.service';
 import { Tema } from './../../common/tema';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, SecurityContext } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Recurso } from 'src/app/common/recurso';
 import { NotificationType } from 'src/app/enum/notification-type.enum';
@@ -14,6 +14,8 @@ import { RecursoService } from 'src/app/service/recurso.service';
 import { NgForm } from '@angular/forms';
 import { CustomHttpResponse } from 'src/app/common/custom-http-response';
 import { AvanceDto } from 'src/app/dto/avanceDto';
+import { DomSanitizer } from '@angular/platform-browser';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'app-recurso',
@@ -41,7 +43,8 @@ export class RecursoComponent implements OnInit {
     private route: ActivatedRoute,
     private router: Router,
     private notificationService: NotificationService,
-    private temaService: TemaService
+    private temaService: TemaService,
+    private _sanitizer: DomSanitizer
   ) {}
 
   ngOnInit(): void {
@@ -87,7 +90,16 @@ export class RecursoComponent implements OnInit {
   ): void {
     this.recursoService.getRecursos(nombreCurso, tituloTema).subscribe(
       (response: Recurso[]) => {
-        this.recursos = response;
+        this.recursos = [];
+        for (let responseTemp of response) {
+          let recurso : Recurso;
+          recurso = new Recurso();
+          recurso.idRecurso = responseTemp.idRecurso;
+          recurso.nombre = responseTemp.nombre;
+          recurso.tipo = responseTemp.tipo;
+          recurso.contenidoSS = this._sanitizer.bypassSecurityTrustResourceUrl(responseTemp.contenido);
+          this.recursos.push(recurso);
+        }
         if (showNotification) {
           this.sendNotification(
             NotificationType.SUCCESS,
