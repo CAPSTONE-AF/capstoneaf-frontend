@@ -55,11 +55,8 @@ export class RecursoComponent implements OnInit {
       this.getTemaActual(params.idTema);
     });
 
-
-
     this.editRecurso = new Recurso();
   }
-
 
   public get isAdmin(): boolean {
     return this.getUserRole() === Role.ADMIN;
@@ -68,7 +65,6 @@ export class RecursoComponent implements OnInit {
   private getUserRole(): string {
     return this.authenticationService.getUserFromLocalCache().role;
   }
-
 
   getTemaActual(idTema: bigint) {
     this.temaService.getTemaById(idTema).subscribe((response: Tema) => {
@@ -80,7 +76,9 @@ export class RecursoComponent implements OnInit {
   }
 
   registrarAvance() {
-    this.avanceService.registerAvance(new AvanceDto(this.user.id, this.tema.idTema)).subscribe();
+    this.avanceService
+      .registerAvance(new AvanceDto(this.user.id, this.tema.idTema))
+      .subscribe();
   }
 
   public onRegresar(): void {
@@ -103,13 +101,15 @@ export class RecursoComponent implements OnInit {
       (response: Recurso[]) => {
         this.recursos = [];
         for (let responseTemp of response) {
-          let recurso : Recurso;
+          let recurso: Recurso;
           recurso = new Recurso();
           recurso.idRecurso = responseTemp.idRecurso;
           recurso.nombre = responseTemp.nombre;
           recurso.tipo = responseTemp.tipo;
           recurso.contenido = responseTemp.contenido;
-          recurso.contenidoSS = this._sanitizer.bypassSecurityTrustResourceUrl(responseTemp.contenido);
+          recurso.contenidoSS = this._sanitizer.bypassSecurityTrustResourceUrl(
+            responseTemp.contenido
+          );
           this.recursos.push(recurso);
         }
         if (showNotification) {
@@ -192,17 +192,19 @@ export class RecursoComponent implements OnInit {
   }
 
   public onDeleteRecurso(nombre: string): void {
-    this.recursoService
-      .deleteRecurso(this.nombreCurso, this.tituloTema, nombre)
-      .subscribe(
-        (response: CustomHttpResponse) => {
-          this.sendNotification(NotificationType.SUCCESS, response.message);
-          this.getRecursos(this.nombreCurso, this.tituloTema, false);
-        },
-        (error: HttpErrorResponse) => {
-          this.sendNotification(NotificationType.ERROR, error.error.message);
-        }
-      );
+    if (confirm('¿Está seguro de eliminar el recurso?')) {
+      this.recursoService
+        .deleteRecurso(this.nombreCurso, this.tituloTema, nombre)
+        .subscribe(
+          (response: CustomHttpResponse) => {
+            this.sendNotification(NotificationType.SUCCESS, response.message);
+            this.getRecursos(this.nombreCurso, this.tituloTema, false);
+          },
+          (error: HttpErrorResponse) => {
+            this.sendNotification(NotificationType.ERROR, error.error.message);
+          }
+        );
+    }
   }
 
   private sendNotification(

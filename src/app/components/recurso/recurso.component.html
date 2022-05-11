@@ -1,119 +1,279 @@
-<br>
+<br />
 <div class="container">
-    <div class="row">
-        <div class="col-12 col-sm-12 col-md-12">
-            <div class="card">
-                    <button (click)="onRegresar()" class="goback"><i class="fa fa-arrow-circle-left"></i> Regresar a Temas</button>
-                <div class="card-header">
-                    <h4>Recursos de: {{tituloTema}}</h4><br>
-                    <button *ngIf="isAdmin" type="button" class="btn btn-info" data-toggle="modal" data-target="#addRecursoModal">
-                        <i class="fa fa-plus"></i> Agregar Recurso
-                      </button>
-                </div>
-                <div class="card-body">
-                    <div class="container bootdey">
-                        <div class="panel panel-default panel-order">
-                            <div class="panel-heading">
-                                <strong>Recursos actuales</strong>
-                            </div>
-                            <div class="panel-body">
-                                <div class="row" *ngFor="let tempRecurso of recursos">
-                                    <div class="col-md-11">
-                                        <div class="row">
-                                            <div class="col-md-12">
-                                                <h5>{{ tempRecurso?.nombre }}</h5>
-                                                <span><strong>Tipo: </strong></span> <span class="label label-info">{{tempRecurso?.tipo}}</span><br />
-                                                <strong>Contenido:</strong><br><br>
-                                                <p *ngIf="tempRecurso?.tipo === 'texto'">{{tempRecurso?.contenido}}<br /><br></p>
-                                                <iframe width="70%" height="315" [src]="tempRecurso?.contenidoSS" [frameBorder]="0" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen *ngIf="tempRecurso?.tipo === 'video'"></iframe>
-                                                <img *ngIf="tempRecurso?.tipo === 'imagen'" src={{tempRecurso?.contenido}} />
-                                                <br><br>
-                                                <button class="btn btn-success btn-sm" title="Edit" (click)="onEditRecurso(tempRecurso)"><i class="fas fa-edit"></i></button>&nbsp;
-                                                <button class="btn btn-danger btn-sm" title="Delete" (click)="onDeleteRecurso(tempRecurso?.nombre)"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12">
+      <div class="card">
+        <button (click)="onRegresar()" class="goback">
+          <i class="fa fa-arrow-circle-left"></i> Regresar a Temas
+        </button>
+        <div class="card-header">
+          <h4>Recursos de: {{ tituloTema }}</h4>
+          <br />
+          <button
+            *ngIf="isAdmin"
+            type="button"
+            class="btn btn-info"
+            data-toggle="modal"
+            data-target="#addRecursoModal"
+          >
+            <i class="fa fa-plus"></i> Agregar Recurso
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="container bootdey">
+            <div class="panel panel-default panel-order">
+              <div class="panel-heading">
+                <strong>Recursos actuales</strong>
+              </div>
+              <div class="panel-body">
+                <div class="row" *ngFor="let tempRecurso of recursos">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <h5>{{ tempRecurso?.nombre }}</h5>
+                        <span><strong>Tipo: </strong></span>
+                        <span class="label label-info">{{
+                          tempRecurso?.tipo
+                        }}</span
+                        ><br />
+                        <strong>Contenido:</strong><br /><br />
+                        <p
+                          style="
+                            justify-content: center;
+                            align-items: center;
+                            display: flex;
+                          "
+                          *ngIf="tempRecurso?.tipo === 'texto'"
+                        >
+                          {{ tempRecurso?.contenido }}<br /><br />
+                        </p>
+                        <div
+                          style="
+                            justify-content: center;
+                            align-items: center;
+                            display: flex;
+                          "
+                        >
+                          <iframe
+                            width="70%"
+                            height="350px"
+                            [src]="tempRecurso?.contenidoSS"
+                            [frameBorder]="0"
+                            title="YouTube video player"
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                            allowfullscreen
+                            *ngIf="tempRecurso?.tipo === 'video'"
+                          ></iframe>
                         </div>
-                    </div>
-
-                    <div class="modal draggable fade bd-example-modal-lg" id="addRecursoModal" tabindex="-1" role="dialog"
-                    aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-                    <div class="modal-dialog" role="document">
-                      <div class="modal-content">
-                        <div class="modal-header">
-                          <h5 class="modal-title text-center">Nuevo Recurso</h5>
-                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                          </button>
+                        <div
+                          style="
+                            justify-content: center;
+                            align-items: center;
+                            display: flex;
+                          "
+                        >
+                          <img
+                            *ngIf="tempRecurso?.tipo === 'imagen'"
+                            src="{{ tempRecurso?.contenido }}"
+                            width="70%"
+                            class="img-fluid"
+                          />
                         </div>
-                        <div class="modal-body">
-                          <div>
-                            <form #newRecursoForm="ngForm" (ngSubmit)="onAddNewRecurso(newRecursoForm)">
-                              <div class="form-group">
-                                <label for="nombre">Nombre</label>
-                                <input type="text" name="nombre" required ngModel class="form-control">
-                              </div>
-                              <div class="form-group">
-                                <label for="tipo">Tipo</label>
-                                <select name="tipo" required [(ngModel)]="optionValue" class="form-control">
-                                  <option value="texto">TEXTO</option>
-                                  <option value="imagen">IMAGEN</option>
-                                  <option value="video">VIDEO</option>
-                                </select>
-                              </div>
-
-                              <div class="form-group">
-                                <label for="contenido">Contenido</label>
-                                <ng-container *ngIf="optionValue == 'texto'">
-                                    <textarea name="contenido" rows="10" cols="40"required ngModel class="form-control">Escribe aquí el texto</textarea>
-                                </ng-container>
-                                <ng-container *ngIf="optionValue == 'imagen'">
-                                  <input type="text" name="contenido" required ngModel class="form-control" placeholder="Ingrese link de la imagen">
-                                </ng-container>
-                                <ng-container *ngIf="optionValue == 'video'">
-                                    <input type="text" name="contenido" required ngModel class="form-control" placeholder="Ingrese link del video">
-                                </ng-container>
-
-                            </div>
-
-                              <button type="submit" style="display: none;" id="new-recurso-save"></button>
-                            </form>
-                          </div>
-                        </div>
-                        <div class="modal-footer">
-                          <button type="button" class="btn btn-secondary" data-dismiss="modal" id="new-recurso-close">Cerrar</button>
-                          <button type="button" (click)="saveNewRecurso()" [disabled]="newRecursoForm.invalid" class="btn btn-primary">Guardar</button>
-                        </div>
+                        <br /><br />
+                        <button
+                          *ngIf="isAdmin"
+                          class="btn btn-success btn-sm"
+                          title="Edit"
+                          (click)="onEditRecurso(tempRecurso)"
+                        >
+                          <i class="fas fa-edit"></i></button
+                        >&nbsp;
+                        <button
+                          *ngIf="isAdmin"
+                          class="btn btn-danger btn-sm"
+                          title="Delete"
+                          (click)="onDeleteRecurso(tempRecurso?.nombre)"
+                        >
+                          <i class="fas fa-trash"></i>
+                        </button>
                       </div>
                     </div>
                   </div>
-
-                  <button [hidden]="true" type="button" id="openRecursoEdit" data-toggle="modal" data-target="#editRecursoModal">
-                </button>
-
-                     <!-- modal edit Recurso -->
-          <div class="modal draggable fade bd-example-modal-lg" id="editRecursoModal" tabindex="-1"
-          role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-          <div class="modal-dialog" role="document">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h5 class="modal-title text-center">Editar Recurso: {{editRecurso?.nombre}}</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                  <span aria-hidden="true">&times;</span>
-                </button>
+                </div>
               </div>
-              <div class="modal-body">
-                <div class="">
-                  <form #editRecursoForm="ngForm">
-                    <div class="form-group">
+            </div>
+          </div>
+
+          <div
+            class="modal draggable fade bd-example-modal-lg"
+            id="addRecursoModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-center">Nuevo Recurso</h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <form
+                      #newRecursoForm="ngForm"
+                      (ngSubmit)="onAddNewRecurso(newRecursoForm)"
+                    >
+                      <div class="form-group">
                         <label for="nombre">Nombre</label>
-                        <input type="text" name="nombre" required [(ngModel)]="editRecurso.nombre" class="form-control">
+                        <input
+                          type="text"
+                          name="nombre"
+                          required
+                          ngModel
+                          class="form-control"
+                        />
                       </div>
                       <div class="form-group">
                         <label for="tipo">Tipo</label>
-                        <select name="tipo" required [(ngModel)]="editRecurso.tipo" class="form-control">
+                        <select
+                          name="tipo"
+                          required
+                          [(ngModel)]="optionValue"
+                          class="form-control"
+                        >
+                          <option value="texto">TEXTO</option>
+                          <option value="imagen">IMAGEN</option>
+                          <option value="video">VIDEO</option>
+                        </select>
+                      </div>
+
+                      <div class="form-group">
+                        <label for="contenido">Contenido</label>
+                        <ng-container *ngIf="optionValue == 'texto'">
+                          <textarea
+                            name="contenido"
+                            rows="10"
+                            cols="40"
+                            required
+                            ngModel
+                            class="form-control"
+                          >
+Escribe aquí el texto</textarea
+                          >
+                        </ng-container>
+                        <ng-container *ngIf="optionValue == 'imagen'">
+                          <input
+                            type="text"
+                            name="contenido"
+                            required
+                            ngModel
+                            class="form-control"
+                            placeholder="Ingrese link de la imagen"
+                          />
+                        </ng-container>
+                        <ng-container *ngIf="optionValue == 'video'">
+                          <input
+                            type="text"
+                            name="contenido"
+                            required
+                            ngModel
+                            class="form-control"
+                            placeholder="Ingrese link del video"
+                          />
+                        </ng-container>
+                      </div>
+
+                      <button
+                        type="submit"
+                        style="display: none"
+                        id="new-recurso-save"
+                      ></button>
+                    </form>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                    id="new-recurso-close"
+                  >
+                    Cerrar
+                  </button>
+                  <button
+                    type="button"
+                    (click)="saveNewRecurso()"
+                    [disabled]="newRecursoForm.invalid"
+                    class="btn btn-primary"
+                  >
+                    Guardar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button
+            [hidden]="true"
+            type="button"
+            id="openRecursoEdit"
+            data-toggle="modal"
+            data-target="#editRecursoModal"
+          ></button>
+
+          <!-- modal edit Recurso -->
+          <div
+            class="modal draggable fade bd-example-modal-lg"
+            id="editRecursoModal"
+            tabindex="-1"
+            role="dialog"
+            aria-labelledby="exampleModalCenterTitle"
+            aria-hidden="true"
+          >
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-center">
+                    Editar Recurso: {{ editRecurso?.nombre }}
+                  </h5>
+                  <button
+                    type="button"
+                    class="close"
+                    data-dismiss="modal"
+                    aria-label="Close"
+                  >
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="">
+                    <form #editRecursoForm="ngForm">
+                      <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input
+                          type="text"
+                          name="nombre"
+                          required
+                          [(ngModel)]="editRecurso.nombre"
+                          class="form-control"
+                        />
+                      </div>
+                      <div class="form-group">
+                        <label for="tipo">Tipo</label>
+                        <select
+                          name="tipo"
+                          required
+                          [(ngModel)]="editRecurso.tipo"
+                          class="form-control"
+                        >
                           <option value="texto">TEXTO</option>
                           <option value="imagen">IMAGEN</option>
                           <option value="video">VIDEO</option>
@@ -121,37 +281,43 @@
                       </div>
                       <div class="form-group">
                         <label for="contenido">Contenido</label>
-                        <textarea name="contenido" rows="10" cols="40"required [(ngModel)]="editRecurso.contenido" class="form-control">Escribe aquí el texto</textarea>
+                        <textarea
+                          name="contenido"
+                          rows="10"
+                          cols="40"
+                          required
+                          [(ngModel)]="editRecurso.contenido"
+                          class="form-control"
+                        >
+Escribe aquí el texto</textarea
+                        >
                       </div>
-                  </form>
+                    </form>
+                  </div>
                 </div>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="closeEditRecursoModalButton">Cerrar</button>
-                <button type="button" (click)="onUpdateRecurso()" [disabled]="editRecursoForm.invalid" class="btn btn-primary">Guardar cambios</button>
+                <div class="modal-footer">
+                  <button
+                    type="button"
+                    class="btn btn-secondary"
+                    data-dismiss="modal"
+                    id="closeEditRecursoModalButton"
+                  >
+                    Cerrar
+                  </button>
+                  <button
+                    type="button"
+                    (click)="onUpdateRecurso()"
+                    [disabled]="editRecursoForm.invalid"
+                    class="btn btn-primary"
+                  >
+                    Guardar cambios
+                  </button>
+                </div>
               </div>
             </div>
           </div>
         </div>
-
-
-
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-

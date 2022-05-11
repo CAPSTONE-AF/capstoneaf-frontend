@@ -95,6 +95,11 @@ export class CursoComponent implements OnInit {
   }
 
   public onDeleteCurso(nombre: string): void {
+    if (
+      confirm(
+        '¿Está seguro de eliminar el curso?'
+      )
+    ) {
     this.cursoService.deleteCurso(nombre).subscribe(
       (response: CustomHttpResponse) => {
         this.sendNotification(NotificationType.SUCCESS, response.message);
@@ -104,6 +109,7 @@ export class CursoComponent implements OnInit {
         this.sendNotification(NotificationType.ERROR, error.error.message);
       }
     );
+    }
   }
 
   public onManageTemas(nombreCurso: string): void {
