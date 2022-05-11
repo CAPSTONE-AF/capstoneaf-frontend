@@ -34,10 +34,10 @@
           <li class="sidebar-dropdown">
             <a href="/editProfile">
               <i class="fas fa-user-edit"></i>
-              <span>Editar Perfil</span>
+              <span>Editar Mi Perfil</span>
             </a>
           </li>
-          <li class="sidebar-dropdown">
+          <li class="sidebar-dropdown" *ngIf="isAdmin">
             <a href="/user/management">
               <i class="fas fa-address-book"></i>
               <span>Gestionar Usuarios</span>
@@ -46,7 +46,8 @@
           <li class="sidebar-dropdown">
             <a href="/curso/management">
               <i class="fas fa-book"></i>
-              <span>Administrar Cursos</span>
+              <span *ngIf="isAdmin" >Administrar Cursos</span>
+              <span *ngIf="!isAdmin" >Ver Cursos</span>
             </a>
           </li>
           <li class="sidebar-dropdown">
@@ -55,7 +56,7 @@
               <span>Historial</span>
             </a>
           </li>
-          <li class="sidebar-dropdown">
+          <li class="sidebar-dropdown" *ngIf="isAdmin">
             <a href="/estadisticas/management">
               <i class="fas fa-book"></i>
               <span>Estadísticas</span>

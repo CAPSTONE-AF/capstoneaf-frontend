@@ -1,3 +1,4 @@
+import { UserDto } from './../dto/userDto';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpResponse, HttpErrorResponse } from '@angular/common/http';
 import { environment } from '../../environments/environment';
@@ -15,12 +16,18 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) {}
 
-  public login(user: User): Observable<HttpResponse<User>> {
-    return this.http.post<User>(`${this.host}/user/login`, user, { observe: 'response' });
+  public login(user: User): Observable<HttpResponse<UserDto>> {
+    let request : string;
+    request =`${this.host}/user/login`;
+    console.log(request);
+    return this.http.post<UserDto>(request, user, { observe: 'response' });
   }
 
-  public register(user: User): Observable<User> {
-    return this.http.post<User>(`${this.host}/user/register`, user);
+  public register(user: User): Observable<UserDto> {
+    let request : string;
+    request =`${this.host}/user/register`;
+    console.log(request);
+    return this.http.post<UserDto>(request, user);
   }
 
   public logOut(): void {
@@ -36,11 +43,11 @@ export class AuthenticationService {
     localStorage.setItem('token', token);
   }
 
-  public addUserToLocalCache(user: User): void {
+  public addUserToLocalCache(user: UserDto): void {
     localStorage.setItem('user', JSON.stringify(user));
   }
 
-  public getUserFromLocalCache(): User {
+  public getUserFromLocalCache(): UserDto {
     return JSON.parse(localStorage.getItem('user'));
   }
 

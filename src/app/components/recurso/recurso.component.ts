@@ -1,3 +1,4 @@
+import { Role } from './../../enum/role.enum';
 import { User } from './../../common/user';
 import { AuthenticationService } from './../../service/authentication.service';
 import { Avance } from './../../common/avance';
@@ -58,6 +59,16 @@ export class RecursoComponent implements OnInit {
 
     this.editRecurso = new Recurso();
   }
+
+
+  public get isAdmin(): boolean {
+    return this.getUserRole() === Role.ADMIN;
+  }
+
+  private getUserRole(): string {
+    return this.authenticationService.getUserFromLocalCache().role;
+  }
+
 
   getTemaActual(idTema: bigint) {
     this.temaService.getTemaById(idTema).subscribe((response: Tema) => {

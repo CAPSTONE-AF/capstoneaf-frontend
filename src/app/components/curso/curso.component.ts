@@ -1,3 +1,4 @@
+import { Role } from './../../enum/role.enum';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -30,6 +31,14 @@ export class CursoComponent implements OnInit {
     this.getCursos(true);
     this.editCurso = new Curso();
     this.user = this.authenticationService.getUserFromLocalCache();
+  }
+
+  public get isAdmin(): boolean {
+    return this.getUserRole() === Role.ADMIN;
+  }
+
+  private getUserRole(): string {
+    return this.authenticationService.getUserFromLocalCache().role;
   }
 
   public saveNewCurso(): void {

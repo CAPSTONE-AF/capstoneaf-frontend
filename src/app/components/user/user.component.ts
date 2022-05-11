@@ -79,7 +79,7 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public onAddNewUser(userForm: NgForm): void {
-    const formData = this.userService.createUserFormDate(null, userForm.value, this.profileImage);
+    const formData = this.userService.createUserFormDate(null, userForm.value, "", undefined);
     this.subscriptions.push(
       this.userService.addUser(formData).subscribe(
         (response: User) => {
@@ -99,7 +99,9 @@ export class UserComponent implements OnInit, OnDestroy {
   }
 
   public onUpdateUser(): void {
-    const formData = this.userService.createUserFormDate(this.currentUsername, this.editUser, this.profileImage);
+    console.log("holiiii");
+    console.log(this.editUser);
+    const formData = this.userService.createUserFormDate(this.currentUsername, this.editUser, undefined, undefined);
     this.subscriptions.push(
       this.userService.updateUser(formData).subscribe(
         (response: User) => {
@@ -120,23 +122,23 @@ export class UserComponent implements OnInit, OnDestroy {
   public onUpdateCurrentUser(user: User): void {
     this.refreshing = true;
     this.currentUsername = this.authenticationService.getUserFromLocalCache().username;
-    const formData = this.userService.createUserFormDate(this.currentUsername, user, this.profileImage);
-    this.subscriptions.push(
-      this.userService.updateUser(formData).subscribe(
-        (response: User) => {
-          this.authenticationService.addUserToLocalCache(response);
-          this.getUsers(false);
-          this.fileName = null;
-          this.profileImage = null;
-          this.sendNotification(NotificationType.SUCCESS, `${response.firstName} ${response.lastName} actualizado exitosamente`);
-        },
-        (errorResponse: HttpErrorResponse) => {
-          this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
-          this.refreshing = false;
-          this.profileImage = null;
-        }
-      )
-      );
+    // const formData = this.userService.createUserFormDate(this.currentUsername, user, "");
+    // this.subscriptions.push(
+    //   this.userService.updateUser(formData).subscribe(
+    //     (response: User) => {
+    //       this.authenticationService.addUserToLocalCache(response);
+    //       this.getUsers(false);
+    //       this.fileName = null;
+    //       this.profileImage = null;
+    //       this.sendNotification(NotificationType.SUCCESS, `${response.firstName} ${response.lastName} actualizado exitosamente`);
+    //     },
+    //     (errorResponse: HttpErrorResponse) => {
+    //       this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+    //       this.refreshing = false;
+    //       this.profileImage = null;
+    //     }
+    //   )
+    //   );
   }
 
   public onUpdateProfileImage(): void {
@@ -239,7 +241,7 @@ export class UserComponent implements OnInit, OnDestroy {
   public get isAdmin(): boolean {
     return this.getUserRole() === Role.ADMIN;
   }
-  
+
 
   private getUserRole(): string {
     return this.authenticationService.getUserFromLocalCache().role;

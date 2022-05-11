@@ -6,7 +6,7 @@
                     <button (click)="onRegresar()" class="goback"><i class="fa fa-arrow-circle-left"></i> Regresar a Temas</button>
                 <div class="card-header">
                     <h4>Recursos de: {{tituloTema}}</h4><br>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#addRecursoModal">
+                    <button *ngIf="isAdmin" type="button" class="btn btn-info" data-toggle="modal" data-target="#addRecursoModal">
                         <i class="fa fa-plus"></i> Agregar Recurso
                       </button>
                 </div>

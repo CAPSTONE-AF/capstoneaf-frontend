@@ -33,9 +33,9 @@
             <input name="searchTerm" #searchInput="ngModel" class="form-control mr-sm-2" ngModel
             (ngModelChange)="searchUsers(searchInput.value)" type="search" placeholder="Buscar usuarios...">
          </form>
-          <button [hidden]="!isAdmin" type="button" class="btn btn-info" data-toggle="modal" data-target="#addUserModal">
+          <!-- <button [hidden]="!isAdmin" type="button" class="btn btn-info" data-toggle="modal" data-target="#addUserModal">
             <i class="fa fa-plus"></i> Agregar Usuario
-          </button>
+          </button> -->
         </div>
         <div class="btn-group">
           <button type="button" (click)="getUsers(true)" class="btn btn-info">
@@ -199,11 +199,11 @@
             <div>
               <form #newUserForm="ngForm" (ngSubmit)="onAddNewUser(newUserForm)">
                 <div class="form-group">
-                  <label for="firstName">Nombre(s)</label>
+                  <label for="firstName">Nombre</label>
                   <input type="text" name="firstName" required ngModel class="form-control">
                 </div>
                 <div class="form-group">
-                  <label for="lastName">Apellido(s)</label>
+                  <label for="lastName">Apellido</label>
                   <input type="text" name="lastName" required ngModel class="form-control">
                 </div>
                 <div class="form-group">
@@ -214,44 +214,10 @@
                   <label for="email">Email</label>
                   <input type="email" name="email" required ngModel class="form-control">
                 </div>
-                <div *ngIf="isAdmin" class="form-group">
-                  <label for="authority">Rol</label>
-                  <select name="role" required ngModel="ROLE_USER" class="form-control">
-                    <option value="ROLE_USER">ESTUDIANTE</option>
-                    <option value="ROLE_ADMIN">ADMINISTRADOR</option>
-                  </select>
+                <div class="form-group">
+                  <label for="password">Password</label>
+                  <input type="password" name="password" required ngModel class="form-control">
                 </div>
-                <div *ngIf="!isAdmin" class="form-group">
-                  <label for="authority">Rol</label>
-                  <input type="text" name="role" required ngModel="USER" readonly class="form-control">
-                </div>
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Foto de Perfil </span>
-                  </div>
-                  <div class="custom-file">
-                    <input type="file" accept="image/*" name="profileImage"
-                    (change)="onProfileImageChange($event.target.files[0].name, $event.target.files[0])"
-                      class="custom-file-input">
-                    <label class="custom-file-label"><span [hidden]="!fileName">{{ fileName }}</span>
-                      <span [hidden]="fileName">Seleccionar Foto</span>
-                    </label>
-                  </div>
-                </div>
-                <fieldset class="form-group">
-                  <div class="form-check">
-                    <label class="form-check-label">
-                      <input type="checkbox" name="active" ngModel class="form-check-input" >
-                      Activo
-                    </label>
-                  </div>
-                  <div class="form-check disabled">
-                    <label class="form-check-label">
-                      <input type="checkbox" name="notLocked" ngModel class="form-check-input">
-                      Desbloqueado
-                    </label>
-                  </div>
-                </fieldset>
                 <button type="submit" style="display: none;" id="new-user-save"></button>
               </form>
             </div>
@@ -282,12 +248,12 @@
         <div class="">
           <form #editUserForm="ngForm">
             <div class="form-group">
-              <label for="firstName">Nombre(s)</label>
+              <label for="firstName">Nombre</label>
               <input type="text" name="firstName" [disabled]="!isAdmin" required
                 [(ngModel)]="editUser.firstName" class="form-control">
             </div>
             <div class="form-group">
-              <label for="lastName">Apellido(s)</label>
+              <label for="lastName">Apellido</label>
               <input type="text" name="lastName" [disabled]="!isAdmin" required
                 [(ngModel)]="editUser.lastName" class="form-control">
             </div>
@@ -304,22 +270,9 @@
             <div class="form-group">
               <label for="authority">Rol <small [hidden]="isAdmin">(read only)</small></label>
                 <select name="role" [disabled]="!isAdmin" required [(ngModel)]="editUser.role" class="form-control">
-                  <option value="ROLE_USER">ESTUDIANTE</option>
-                  <option value="ROLE_ADMIN">ADMINISTRADOR</option>
+                  <option value="ROLE_USER">ROLE_USER</option>
+                  <option value="ROLE_ADMIN">ROLE_ADMIN</option>
                 </select>
-            </div>
-            <div class="input-group mb-2">
-              <div class="input-group-prepend">
-                <span class="input-group-text">Foto de Perfil </span>
-              </div>
-              <div class="custom-file">
-                <input type="file" accept="image/*" [disabled]="!isAdmin" name="profileImage"
-                  (change)="onProfileImageChange($event.target.files[0].name, $event.target.files[0])"
-                  class="custom-file-input">
-                <label class="custom-file-label"><span [hidden]="!fileName">{{fileName}}</span>
-                  <span [hidden]="fileName">Seleccionar Foto</span>
-                </label>
-              </div>
             </div>
             <fieldset class="form-group">
               <div class="form-check">

@@ -1,3 +1,4 @@
+import { Role } from './../../enum/role.enum';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from 'src/app/common/user';
@@ -18,6 +19,15 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
+    console.log(this.user);
+  }
+
+  public get isAdmin(): boolean {
+    return this.getUserRole() === Role.ADMIN;
+  }
+
+  private getUserRole(): string {
+    return this.authenticationService.getUserFromLocalCache().role;
   }
 
   async onLogOut(): Promise<void>  {

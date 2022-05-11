@@ -1,3 +1,4 @@
+import { Role } from './../../enum/role.enum';
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
@@ -40,6 +41,14 @@ export class TemaComponent implements OnInit {
     this.editTema = new Tema();
   }
 
+  public get isAdmin(): boolean {
+    return this.getUserRole() === Role.ADMIN;
+  }
+
+  private getUserRole(): string {
+    return this.authenticationService.getUserFromLocalCache().role;
+  }
+
 
   public getTemas(nombreCurso: string,showNotification: boolean): void {
     this.temaService.getTemas(nombreCurso).subscribe(
@@ -63,7 +72,7 @@ public saveNewTema(): void {
 
 public onAddNewTema(temaForm: NgForm): void {
   console.log(this.user);
-  const formData = this.temaService.createTemaFormDate(this.nombreCurso, null, temaForm.value, this.portadaUrl,this.user.id);
+  const formData = this.temaService.createTemaFormDate(this.nombreCurso, null, temaForm.value, "",this.user.id);
   this.temaService.addTema(formData).subscribe(
       (response: Tema) => {
         this.clickButton('new-tema-close');
@@ -82,8 +91,8 @@ public onAddNewTema(temaForm: NgForm): void {
 
 
 
-public onUpdateTema(): void {
-  const formData = this.temaService.createTemaFormDate(this.nombreCurso,this.currentTitulo, this.editTema, this.portadaUrl,this.user.id);
+public onUpdateTema(tema:Tema): void {
+  const formData = this.temaService.createTemaFormDate(this.nombreCurso,this.currentTitulo, this.editTema, tema.portadaUrl,this.user.id);
     this.temaService.updateTema(formData).subscribe(
       (response: Tema) => {
         this.clickButton('closeEditTemaModalButton');

@@ -14,27 +14,45 @@ export class CursoService {
   constructor(private http: HttpClient) {}
 
   public getCursos(): Observable<Curso[]> {
-    return this.http.get<Curso[]>(`${this.host}/curso/list`);
+    let request : string;
+    request =`${this.host}/curso/list`;
+    console.log(request);
+    return this.http.get<Curso[]>(request);
   }
 
   public addCurso(formData: FormData): Observable<Curso> {
-    return this.http.post<Curso>(`${this.host}/curso/add`, formData);
+    let request : string;
+    request =`${this.host}/curso/add`;
+    console.log(request);
+    return this.http.post<Curso>(request, formData);
   }
 
   public updateCurso(formData: FormData): Observable<Curso> {
-    return this.http.post<Curso>(`${this.host}/curso/update`, formData);
+    let request : string;
+    request =`${this.host}/curso/update`;
+    console.log(request);
+    return this.http.post<Curso>(request, formData);
   }
 
   public exportarPieChartPopCursos(): Observable<Blob> {
-    return this.http.get<Blob>(`${this.host}/curso/exportar/piechart/pop_cursos/pdf`);
+    let request : string;
+    request =`${this.host}/curso/exportar/piechart/pop_cursos/pdf`;
+    console.log(request);
+    return this.http.get<Blob>(request);
   }
 
   public deleteCurso(nombre: string): Observable<CustomHttpResponse> {
-    return this.http.delete<CustomHttpResponse>(`${this.host}/curso/delete/${nombre}`);
+    let request : string;
+    request =`${this.host}/curso/delete/${nombre}`;
+    console.log(request);
+    return this.http.delete<CustomHttpResponse>(request);
   }
 
   public findCurso(nombreCurso: string): Observable<Curso> {
-    return this.http.get<Curso>(`${this.host}/curso/find/${nombreCurso}`);
+    let request : string;
+    request =`${this.host}/curso/find/${nombreCurso}`;
+    console.log(request);
+    return this.http.get<Curso>(request);
 
   }
 

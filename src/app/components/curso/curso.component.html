@@ -11,11 +11,10 @@
                     </button>
                 </div>
                 <div class="card-body">
-                    <div class="table-responsive" id="proTeamScroll" tabindex="2" style="height: 400px; overflow: hidden; outline: none;overflow: scroll;">
+                    <div class="table-responsive" id="proTeamScroll" tabindex="2" style="height: 380px; overflow: hidden; outline: none;overflow: scroll;">
                         <table class="table table-striped">
                             <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Curso</th>
                                     <th>N° Temas</th>
                                     <th>Acciones</th>
@@ -23,13 +22,12 @@
                             </thead>
                             <tbody>
                                 <tr *ngFor="let tempCurso of cursos">
-                                    <td align ="center">{{ tempCurso.idCurso }}</td>
                                     <td align ="center"><strong>{{ tempCurso.nombre }}</strong></td>
                                     <td align ="center" >{{ tempCurso.cantTemas }}</td>
                                     <td align ="center">
-                                    <button class="btn btn-outline-info" (click)="onEditCurso(tempCurso)"><i class="fas fa-edit"></i></button>&nbsp;
+                                    <button *ngIf="isAdmin" class="btn btn-outline-info" (click)="onEditCurso(tempCurso)"><i class="fas fa-edit"></i></button>&nbsp;
                                     <button class="btn btn-outline-success" (click)="onManageTemas(tempCurso?.nombre)"><i class="fas fa-book"></i></button>&nbsp;
-                                    <button class="btn btn-outline-danger" (click)="onDeleteCurso(tempCurso?.nombre)"><i class="fas fa-trash"></i></button>
+                                    <button *ngIf="isAdmin" class="btn btn-outline-danger" (click)="onDeleteCurso(tempCurso?.nombre)"><i class="fas fa-trash"></i></button>
                                     </td>
                                 </tr>
                             </tbody>

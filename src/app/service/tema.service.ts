@@ -15,38 +15,57 @@ export class TemaService {
   constructor(private http: HttpClient) { }
 
   public getTemas(nombreCurso: string): Observable<Tema[]> {
-    return this.http.get<Tema[]>(`${this.host}/tema/list/${nombreCurso}`);
+    let request : string;
+    request =`${this.host}/tema/list/${nombreCurso}`;
+    console.log(request);
+    return this.http.get<Tema[]>(request);
   }
 
   public getTemaById(idTema: bigint): Observable<Tema> {
-    return this.http.get<Tema>(`${this.host}/tema/find/${idTema}`);
+    let request : string;
+    request =`${this.host}/tema/find/${idTema}`;
+    console.log(request);
+    return this.http.get<Tema>(request);
   }
 
   public addTema(formData: FormData): Observable<Tema> {
-    return this.http.post<Tema>(`${this.host}/tema/add`, formData);
+    let request : string;
+    request =`${this.host}/tema/add`;
+    console.log(request);
+    return this.http.post<Tema>(request, formData);
   }
 
   public updateTema(formData: FormData): Observable<Tema> {
-    return this.http.post<Tema>(`${this.host}/tema/update`, formData);
+    let request : string;
+    request =`${this.host}/tema/update`;
+    console.log(request);
+    return this.http.post<Tema>(request, formData);
   }
 
   public updatePortadaImage(formData: FormData): Observable<HttpEvent<Tema>> {
-    return this.http.post<Tema>(`${this.host}/tema/updatePortadaImage`, formData,
+    let request : string;
+    request =`${this.host}/tema/updatePortadaImage`;
+    console.log(request);
+    return this.http.post<Tema>(request, formData,
     {reportProgress: true,
       observe: 'events'
     });
   }
 
   public deleteTema(nombreCurso: string, titulo: string): Observable<CustomHttpResponse> {
-    return this.http.delete<CustomHttpResponse>(`${this.host}/tema/delete/${nombreCurso}/${titulo}`);
+    let request : string;
+    request =`${this.host}/tema/delete/${nombreCurso}/${titulo}`;
+    console.log(request);
+    return this.http.delete<CustomHttpResponse>(request);
   }
 
-  public createTemaFormDate(nombreCurso: string, currentTitulo: string,tema: Tema, portadaUrl: File, id:bigint): FormData {
+  public createTemaFormDate(nombreCurso: string, currentTitulo: string,tema: Tema, portadaUrl: string, id:bigint): FormData {
     const formData = new FormData();
     formData.append('nombreCurso', nombreCurso);
     formData.append('currentTitulo', currentTitulo);
     formData.append('titulo', tema.titulo);
-    formData.append('portadaUrl', portadaUrl);
+    if(portadaUrl!=undefined)
+      formData.append('portadaUrl', portadaUrl);
     formData.append('idUser', id.toString());
     return formData;
   }

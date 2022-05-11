@@ -1,3 +1,6 @@
+import { UserDto } from './../../dto/userDto';
+import { GradoService } from './../../service/grado.service';
+import { Grado } from './../../common/grado';
 import { HttpErrorResponse, HttpEvent, HttpEventType } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
@@ -14,9 +17,9 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./edit-profile.component.css']
 })
 export class EditProfileComponent implements OnInit {
-  
+
   public users: User[];
-  public user: User;
+  public user: UserDto;
   public refreshing: boolean;
   public selectedUser: User;
   public fileName: string;
@@ -25,12 +28,29 @@ export class EditProfileComponent implements OnInit {
   public editUser = new User();
   private currentUsername: string;
   public fileStatus = new FileUploadStatus();
+  public grados:Grado [];
+  public idGradoSeleccionado: bigint;
+  public imageUrlActual : string;
 
   constructor(private authenticationService: AuthenticationService,
-              private userService: UserService, private notificationService: NotificationService) {}
+              private userService: UserService, private notificationService: NotificationService,private gradoService: GradoService) {}
 
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
+    this.idGradoSeleccionado = this.user.idGrado;
+    this.imageUrlActual = this.user.profileImageUrl;
+    this.getGrados(true);
+  }
+
+  public getGrados(showNotification: boolean): void {
+    this.gradoService.getAllGrados().subscribe(
+      (response: Grado[]) => {
+        this.grados = response;
+      },
+      (errorResponse: HttpErrorResponse) => {
+        this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+      }
+    );
   }
 
   private reportUploadProgress(event: HttpEvent<any>): void {
@@ -74,22 +94,22 @@ export class EditProfileComponent implements OnInit {
   public onUpdateCurrentUser(user: User): void {
     this.refreshing = true;
     this.currentUsername = this.authenticationService.getUserFromLocalCache().username;
-    const formData = this.userService.createUserFormDate(this.currentUsername, user, this.profileImage);
-    this.subscriptions.push(
+    console.log(this.imageUrlActual);
+    const formData = this.userService.createUserFormDate(this.currentUsername, user, this.imageUrlActual, this.idGradoSeleccionado);
       this.userService.updateUser(formData).subscribe(
-        (response: User) => {
+        (response: UserDto) => {
           this.authenticationService.addUserToLocalCache(response);
           this.fileName = null;
           this.profileImage = null;
           this.sendNotification(NotificationType.SUCCESS, `${response.firstName} ${response.lastName} actualizado exitosamente.`);
           this.refreshing = false;
+          window.location.reload();
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
           this.refreshing = false;
           this.profileImage = null;
         }
-      )
       );
   }
 

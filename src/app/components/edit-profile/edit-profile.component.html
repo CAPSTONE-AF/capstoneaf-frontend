@@ -36,14 +36,7 @@
                     </div>
                   </div>
                   <div
-                    class="
-                      menu
-                      col
-                      d-flex
-                      flex-column flex-sm-row
-                      justify-content-between
-                      mb-3
-                    "
+                    class="menu col d-flex flex-column flex-sm-row justify-content-between mb-3"
                   >
                     <div class="text-center text-sm-left mb-2 mb-sm-0">
                       <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">
@@ -63,21 +56,13 @@
                       </div>
                       <div class="mt-2">
                         <button
-                          (click)="updateProfileImage()"
+                        data-toggle="modal" data-target="#updateImageUrl"
                           class="btn btn-primary"
                           type="button"
                         >
                           <i class="fa fa-fw fa-camera"></i>
                           <span>Cambiar foto</span>
                         </button>
-                      </div>
-                    </div>
-                    <div class="text-center text-sm-right-right">
-                      <div class="text-muted">
-                        <small
-                          >Conectado el
-                          {{ user?.joinDate | date: "mediumDate" }}</small
-                        >
                       </div>
                     </div>
                   </div>
@@ -147,45 +132,23 @@
                             </div>
                           </div>
                           <div class="row">
-                            <div class="col mb-3">
+                            <div class="col">
                               <div class="form-group">
-                                <label>Rol</label>
+                                <label>Grado</label>
                                 <select
-                                  name="role"
+                                  name="idGrado"
                                   required
-                                  [(ngModel)]="user.role"
+                                  [(ngModel)]="idGradoSeleccionado"
                                   class="form-control"
                                 >
-                                  <option value="ROLE_USER">USER</option>
-                                  <option value="ROLE_ADMIN">ADMIN</option>
+                                  <option
+                                    *ngFor="let grado of grados"
+                                    [ngValue]="grado.idGrado"
+                                  >
+                                    {{ grado.valorNombreGrado }}
+                                  </option>
                                 </select>
                               </div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div class="row">
-                        <div class="col">
-                          <div class="custom-controls-stacked px-2">
-                            <div class="custom-control custom-checkbox">
-                              <input
-                                name="active"
-                                type="checkbox"
-                                [(ngModel)]="user.active"
-                                class="custom-control-input"
-                              />
-                              <label class="custom-control-label">Activo</label>
-                            </div>
-                            <div class="custom-control custom-checkbox">
-                              <input
-                                name="notLocked"
-                                type="checkbox"
-                                [(ngModel)]="user.notLocked"
-                                class="custom-control-input"
-                              />
-                              <label class="custom-control-label"
-                                >Desbloqueado</label
-                              >
                             </div>
                           </div>
                         </div>
@@ -213,6 +176,36 @@
     </div>
   </div>
 </div>
+
+
+    <!-- model add user -->
+    <div class="modal draggable fade bd-example-modal-lg" id="updateImageUrl" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title text-center">Cambiar Imagen de Perfil</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <form>
+                <div class="form-group">
+                  <label for="imageUrl">Ingrese link de la imagen:</label>
+                  <input type="text" name="imageUrl" required [(ngModel)]="imageUrlActual" class="form-control">
+                </div>
+              </form>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal" id="updateImageUrlClose">Save</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
 <form enctype="multipart/form-data" style="display: none">
   <input
     type="file"

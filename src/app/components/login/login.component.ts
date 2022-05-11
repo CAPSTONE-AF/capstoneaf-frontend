@@ -1,3 +1,5 @@
+import { UserDto } from './../../dto/userDto';
+import { UserService } from 'src/app/service/user.service';
 import { HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
@@ -7,6 +9,7 @@ import { NotificationType } from '../../enum/notification-type.enum';
 import { User } from '../../common/user';
 import { AuthenticationService } from '../../service/authentication.service';
 import { NotificationService } from '../../service/notification.service';
+import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
 
 @Component({
   selector: 'app-login',
@@ -18,11 +21,11 @@ export class LoginComponent implements OnInit, OnDestroy{
   private subscriptions: Subscription[] = [];
 
   constructor(private router: Router, private authenticationService: AuthenticationService,
-              private notificationService: NotificationService) { }
+              private notificationService: NotificationService, private userService: UserService) { }
 
   ngOnInit(): void {
     if(this.authenticationService.isUserLoggedIn()){
-      this.router.navigateByUrl('/user/management');
+      this.router.navigateByUrl('/curso/management');
     }else{
       this.router.navigateByUrl('/login');
     }
@@ -32,13 +35,13 @@ export class LoginComponent implements OnInit, OnDestroy{
     this.showLoading = true;
     this.subscriptions.push(
       this.authenticationService.login(user).subscribe(
-        async (response: HttpResponse<User>) => {
+        async (response: HttpResponse<UserDto>) => {
           const token = response.headers.get(HeaderType.JWT_TOKEN);
           this.authenticationService.saveToken(token);
           this.authenticationService.addUserToLocalCache(response.body);
           window.location.reload();
           await this.delay(90000);
-          this.router.navigateByUrl('/user/management');
+          this.router.navigateByUrl('/curso/management');
           this.showLoading = false;
         },
         (errorResponse: HttpErrorResponse) => {
@@ -62,6 +65,10 @@ export class LoginComponent implements OnInit, OnDestroy{
 
   ngOnDestroy(): void{
     this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
+
+  private clickButton(buttonId: string): void {
+    document.getElementById(buttonId).click();
   }
 
 }

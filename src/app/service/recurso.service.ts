@@ -15,20 +15,32 @@ export class RecursoService {
   constructor(private http: HttpClient) { }
 
   public getRecursos(nombreCurso: string, tituloTema: string): Observable<Recurso[]> {
-    return this.http.get<Recurso[]>(`${this.host}/recurso/list/${nombreCurso}/${tituloTema}`);
+    let request : string;
+    request =`${this.host}/recurso/list/${nombreCurso}/${tituloTema}`;
+    console.log(request);
+    return this.http.get<Recurso[]>(request);
   }
 
   public addRecurso(formData: FormData): Observable<Recurso> {
-    return this.http.post<Recurso>(`${this.host}/recurso/add`, formData);
+    let request : string;
+    request =`${this.host}/recurso/add`;
+    console.log(request);
+    return this.http.post<Recurso>(request, formData);
   }
 
   public updateRecurso(formData: FormData): Observable<Recurso> {
-    return this.http.post<Recurso>(`${this.host}/recurso/update`, formData);
+    let request : string;
+    request =`${this.host}/recurso/update`;
+    console.log(request);
+    return this.http.post<Recurso>(request, formData);
   }
 
 
   public deleteRecurso(nombreCurso: string, tituloTema: string, nombre: string): Observable<CustomHttpResponse> {
-    return this.http.delete<CustomHttpResponse>(`${this.host}/recurso/delete/${nombreCurso}/${tituloTema}/${nombre}`);
+    let request : string;
+    request =`${this.host}/recurso/delete/${nombreCurso}/${tituloTema}/${nombre}`;
+    console.log(request);
+    return this.http.delete<CustomHttpResponse>(request);
   }
 
   public createRecursoFormDate(nombreCurso: string, tituloTema: string, currentNombre: string, recurso: Recurso): FormData {
