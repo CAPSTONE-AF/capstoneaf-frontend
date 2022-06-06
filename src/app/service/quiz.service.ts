@@ -1,4 +1,4 @@
-import { QuizDto } from '../dto/QuizDto';
+import { QuizDto } from 'src/app/dto/quizDto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';

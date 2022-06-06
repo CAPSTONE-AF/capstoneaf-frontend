@@ -1,5 +1,4 @@
 import { Grado } from './../common/grado';
-import { AvanceDto } from './../dto/avanceDto';
 import { Avance } from './../common/avance';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'

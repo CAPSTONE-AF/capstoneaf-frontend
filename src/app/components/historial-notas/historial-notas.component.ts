@@ -1,6 +1,6 @@
 import { NotificationType } from 'src/app/enum/notification-type.enum';
 import { Tema } from 'src/app/common/tema';
-import { QuizDto } from '../../dto/QuizDto';
+import { QuizDto } from 'src/app/dto/quizDto';
 import { Result } from './../../common/result';
 import { User } from 'src/app/common/user';
 import { DatePipe } from '@angular/common';
@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
 import { QuizService } from './../../service/quiz.service';
 import { TemaService } from 'src/app/service/tema.service';
 import { ResultService } from './../../service/result.service';
-import { ResultDto } from '../../dto/ResultDto';
+import { ResultDto } from 'src/app/dto/resultDto';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

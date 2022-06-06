@@ -1,6 +1,6 @@
 import { Quiz } from './../../common/quiz';
 import { Role } from './../../enum/role.enum';
-import { QuizService } from './../../service/quiz.service';
+import { QuizService } from 'src/app/service/quiz.service';
 import { Tema } from './../../common/tema';
 import { User } from './../../common/user';
 import { DomSanitizer } from '@angular/platform-browser';
@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationType } from './../../enum/notification-type.enum';
 import { CustomHttpResponse } from './../../common/custom-http-response';
-import { QuizDto } from '../../dto/QuizDto';
+import { QuizDto } from 'src/app/dto/quizDto';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

@@ -1,4 +1,4 @@
-import { AnswerDto } from '../dto/AnswerDto';
+import { AnswerDto } from 'src/app/dto/answerDto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs';

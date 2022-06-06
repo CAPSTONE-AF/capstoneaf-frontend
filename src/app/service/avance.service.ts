@@ -1,4 +1,4 @@
-import { AvanceDto } from './../dto/avanceDto';
+import { AvanceDto } from 'src/app/dto/avanceDto';
 import { Avance } from './../common/avance';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'

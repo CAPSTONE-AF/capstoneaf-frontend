@@ -1,8 +1,8 @@
-import { AnswerService } from './../../service/answer.service';
-import { ResultDto } from '../../dto/ResultDto';
+import { AnswerService } from 'src/app/service/answer.service';
+import { ResultDto } from 'src/app/dto/resultDto';
 import { ResultService } from './../../service/result.service';
-import { AnswerDto } from '../../dto/AnswerDto';
-import { CustomHttpResponse } from './../../common/custom-http-response';
+import { AnswerDto } from 'src/app/dto/answerDto';
+import { CustomHttpResponse } from 'src/app/common/custom-http-response';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationType } from './../../enum/notification-type.enum';
 import { Role } from './../../enum/role.enum';
@@ -15,8 +15,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { AuthenticationService } from './../../service/authentication.service';
 import { Tema } from './../../common/tema';
 import { User } from './../../common/user';
-import { QuestionDto } from '../../dto/QuestionDto';
-import { QuizDto } from '../../dto/QuizDto';
+import { QuestionDto } from 'src/app/dto/questionDto';
+import { QuizDto } from 'src/app/dto/quizDto';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
