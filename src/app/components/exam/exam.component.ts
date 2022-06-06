@@ -12,7 +12,7 @@ import { NgForm } from '@angular/forms';
 import { HttpErrorResponse } from '@angular/common/http';
 import { NotificationType } from './../../enum/notification-type.enum';
 import { CustomHttpResponse } from './../../common/custom-http-response';
-import { QuizDto } from './../../dto/quizDto';
+import { QuizDto } from '../../dto/QuizDto';
 import { Component, OnInit } from '@angular/core';
 
 @Component({

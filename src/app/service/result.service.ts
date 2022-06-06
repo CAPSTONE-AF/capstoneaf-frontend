@@ -1,7 +1,6 @@
-import { ResultDto } from './../dto/ResultDto';
+import { ResultDto } from '../dto/ResultDto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Result } from '../common/Result';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CustomHttpResponse } from '../common/custom-http-response';

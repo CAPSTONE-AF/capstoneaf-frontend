@@ -1,7 +1,6 @@
-import { QuizDto } from './../dto/QuizDto';
+import { QuizDto } from '../dto/QuizDto';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http'
-import { Quiz } from '../common/Quiz';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { CustomHttpResponse } from '../common/custom-http-response';
