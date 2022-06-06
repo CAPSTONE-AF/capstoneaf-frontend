@@ -43,7 +43,7 @@ export class AvanceComponent implements OnInit {
       .subscribe((response: AvanceDto[]) => {
         for (let responseTemp of response) {
           this.temaService
-            .getTemaById(responseTemp.idTema)
+            .getTemaById(responseTemp.idTema.toString())
             .subscribe((resp: Tema) => {
               this.avances.push(new Avance(responseTemp.idAvance, this.user, resp, responseTemp.fechaCreacion));
             });

@@ -67,7 +67,7 @@ export class RecursoComponent implements OnInit {
   }
 
   getTemaActual(idTema: bigint) {
-    this.temaService.getTemaById(idTema).subscribe((response: Tema) => {
+    this.temaService.getTemaById(idTema.toString()).subscribe((response: Tema) => {
       this.tema = response;
       this.tituloTema = this.tema.titulo;
       this.registrarAvance();
@@ -205,6 +205,11 @@ export class RecursoComponent implements OnInit {
           }
         );
     }
+  }
+  public onManageQuizzes(idTema: any): void {
+    this.router.navigate(['/quiz/management'], {
+      queryParams: { nombreCurso: this.nombreCurso, idTema: idTema }
+    });
   }
 
   private sendNotification(

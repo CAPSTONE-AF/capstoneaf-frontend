@@ -18,6 +18,13 @@
           >
             <i class="fa fa-plus"></i> Agregar Recurso
           </button>
+          <br><br>
+            <button *ngIf="isAdmin" type="button" class="btn btn-warning" (click)="onManageQuizzes(tema?.idTema)">
+              <i class="fa fa-pencil-square"></i> Administrar Examenes
+            </button>
+            <button *ngIf="!isAdmin" type="button" class="btn btn-warning" (click)="onManageQuizzes(tema?.idTema)">
+              <i class="fa fa-pencil-square"></i> Rendir Examen
+            </button>
         </div>
         <div class="card-body">
           <div class="container bootdey">

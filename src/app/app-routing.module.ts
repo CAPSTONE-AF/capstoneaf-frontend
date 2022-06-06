@@ -1,3 +1,6 @@
+import { HistorialNotasComponent } from './components/historial-notas/historial-notas.component';
+import { QuestionComponent } from './components/question/question.component';
+import { ExamComponent } from './components/exam/exam.component';
 import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
 import { AvanceComponent } from './components/avance/avance.component';
 import { NgModule } from '@angular/core';
@@ -17,11 +20,14 @@ const routes: Routes = [
   { path: 'user/management', component: UserComponent, canActivate: [AuthenticationGuard] },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'curso/management', component: CursoComponent, canActivate: [AuthenticationGuard]},
+  { path: 'quiz/management', component: ExamComponent, canActivate: [AuthenticationGuard]},
   { path: 'avance/management', component: AvanceComponent, canActivate: [AuthenticationGuard]},
+  { path: 'historialNota/management', component: HistorialNotasComponent, canActivate: [AuthenticationGuard]},
   { path: 'estadisticas/management', component: EstadisticasComponent, canActivate: [AuthenticationGuard]},
   { path: 'editProfile', component: EditProfileComponent, canActivate: [AuthenticationGuard] },
   { path: 'tema/management', component: TemaComponent, canActivate: [AuthenticationGuard] },
   { path: 'recurso/management', component: RecursoComponent, canActivate: [AuthenticationGuard] },
+  { path: 'question/management', component: QuestionComponent, canActivate: [AuthenticationGuard] },
 ];
 
 @NgModule({

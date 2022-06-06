@@ -1,0 +1,36 @@
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-12 col-md-12">
+            <div class="card">
+                <div class="card-header">
+                    <h4>Historial</h4>
+                </div>
+                <div class="card-body">
+                    <div class="table-responsive" id="proTeamScroll" tabindex="2" style="height: 450px; overflow: hidden; outline: none;overflow: scroll;">
+                        <table class="table table-striped">
+                            <thead>
+                                <tr>
+                                    <th>Fecha Examen</th>
+                                    <th>Tema</th>
+                                    <th>Nº Correctas</th>
+                                    <th>Nº Incorrectas</th>
+                                    <th>Nota</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let tempResult of results">
+                                    <td align ="center"><strong>{{ tempResult.submitDate | date:'dd/MM/yyyy hh:mm:ss a'}}</strong></td>
+                                    <td align ="center" >{{ tempResult.temaTitle }}</td>
+                                    <td align ="center" >{{ tempResult.numCorrectAns }}</td>
+                                    <td align ="center" >{{ tempResult.numIncorrectAns }}</td>
+                                    <td align ="center" >{{ tempResult.resultScore }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+    </div>
+</div>
+
+
+

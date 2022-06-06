@@ -22,6 +22,9 @@ import { RecursoComponent } from './components/recurso/recurso.component';
 import { AvanceComponent } from './components/avance/avance.component';
 import { DatePipe } from '@angular/common';
 import { EstadisticasComponent } from './components/estadisticas/estadisticas.component';
+import { ExamComponent } from './components/exam/exam.component';
+import { QuestionComponent } from './components/question/question.component';
+import { HistorialNotasComponent } from './components/historial-notas/historial-notas.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -34,7 +37,10 @@ import { EstadisticasComponent } from './components/estadisticas/estadisticas.co
     TemaComponent,
     RecursoComponent,
     AvanceComponent,
-    EstadisticasComponent
+    EstadisticasComponent,
+    ExamComponent,
+    QuestionComponent,
+    HistorialNotasComponent
   ],
   imports: [
     BrowserModule,

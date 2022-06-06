@@ -21,7 +21,7 @@ export class TemaService {
     return this.http.get<Tema[]>(request);
   }
 
-  public getTemaById(idTema: bigint): Observable<Tema> {
+  public getTemaById(idTema: string): Observable<Tema> {
     let request : string;
     request =`${this.host}/tema/find/${idTema}`;
     console.log(request);

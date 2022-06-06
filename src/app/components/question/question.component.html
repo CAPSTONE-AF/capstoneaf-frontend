@@ -1,0 +1,208 @@
+<br />
+<div class="container">
+  <div class="row">
+    <div class="col-12 col-sm-12 col-md-12">
+      <div class="card">
+        <button (click)="onRegresar()" class="goback">
+          <i class="fa fa-arrow-circle-left"></i> Regresar a Exámenes
+        </button>
+        <div class="card-header">
+          <h4>Preguntas de: {{ quiz.title }}</h4>
+          <br />
+          <button *ngIf="isAdmin" type="button" class="btn btn-info" data-toggle="modal"
+            data-target="#addQuestionModal">
+            <i class="fa fa-plus"></i> Agregar Pregunta
+          </button>
+        </div>
+        <div class="card-body">
+          <div class="container bootdey">
+            <div class="panel panel-default panel-order">
+              <div class="panel-heading">
+                <strong>Preguntas actuales</strong>
+              </div>
+              <div class="panel-body">
+                <div class="row" *ngFor="let tempQuestion of questions">
+                  <div class="col-md-12">
+                    <div class="row">
+                      <div class="col-md-12">
+                        <div style="display: flex;">
+
+                          <h5 style="margin-right: 10px;"> {{ tempQuestion?.content }}</h5>
+                        <button *ngIf="isAdmin" class="btn btn-success btn-sm" title="Edit"
+                        (click)="onEditQuestion(tempQuestion)">
+                        <i class="fas fa-edit"></i></button>
+
+                        </div>
+
+                        <br>
+                        <strong>Opciones:</strong><br /><br />
+                        <ol *ngIf="isAdmin">
+                          <li>{{ tempQuestion?.option1 }}</li>
+                          <li>{{ tempQuestion?.option2 }}</li>
+                          <li>{{ tempQuestion?.option3 }}</li>
+                          <li>{{ tempQuestion?.option4 }}</li>
+                        </ol>
+
+                        <div *ngIf="!isAdmin">
+
+                          <input  [(ngModel)]="tempQuestion.answerByUser" [checked]="tempQuestion.answerByUser" value="OP1" type="radio" name="{{ tempQuestion?.idQuestion }}">
+                          <label style="margin-left: 10px;">{{ tempQuestion?.option1 }}</label><br>
+
+                          <input  [(ngModel)]="tempQuestion.answerByUser" [checked]="tempQuestion.answerByUser" value="OP2" type="radio" name="{{ tempQuestion?.idQuestion }}">
+                          <label style="margin-left: 10px;">{{ tempQuestion?.option2 }}</label><br>
+
+                          <input  [(ngModel)]="tempQuestion.answerByUser" [checked]="tempQuestion.answerByUser" value="OP3" type="radio" name="{{ tempQuestion?.idQuestion }}">
+                          <label style="margin-left: 10px;">{{ tempQuestion?.option3 }}</label><br>
+
+                          <input  [(ngModel)]="tempQuestion.answerByUser" [checked]="tempQuestion.answerByUser" value="OP4" type="radio" name="{{ tempQuestion?.idQuestion }}">
+                          <label style="margin-left: 10px;">{{ tempQuestion?.option4 }}</label><br>
+                        </div>
+
+
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <br>
+                <div style="display: flex; justify-content: center;">
+                  <button *ngIf="!isAdmin" class="btn btn-warning btn-sm" title="Edit" (click)="sendAnswers()">ENVIAR RESPUESTAS</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <div class="modal draggable fade bd-example-modal-lg" id="addQuestionModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-center">Nueva Pregunta</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div>
+                    <form #newQuestionForm="ngForm" (ngSubmit)="onAddNewQuestion(newQuestionForm.value)">
+                      <div class="form-group">
+                        <label for="content">Nombre</label>
+                        <input type="text" name="content" required ngModel class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="option1">Alternativa 1</label>
+                        <input type="text" name="option1" required ngModel class="form-control" />
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="option2">Alternativa 2</label>
+                        <input type="text" name="option2" required ngModel class="form-control" />
+                      </div>
+
+
+
+                      <div class="form-group">
+                        <label for="option3">Alternativa 3</label>
+                        <input type="text" name="option3" required ngModel class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="option4">Alternativa 4</label>
+                        <input type="text" name="option4" required ngModel class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="answer">Alternativa Correcta</label>
+                        <input type="text" name="answer" required ngModel class="form-control" />
+                      </div>
+
+                      <button type="submit" style="display: none" id="new-question-save"></button>
+                    </form>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal" id="new-question-close">
+                    Cerrar
+                  </button>
+                  <button type="button" (click)="saveNewQuestion()" [disabled]="newQuestionForm.invalid"
+                    class="btn btn-primary">
+                    Guardar
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <button [hidden]="true" type="button" id="openQuestionEdit" data-toggle="modal"
+            data-target="#editQuestionModal"></button>
+
+          <!-- modal edit Question -->
+          <div class="modal draggable fade bd-example-modal-lg" id="editQuestionModal" tabindex="-1" role="dialog"
+            aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title text-center">Editar Pregunta</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <div class="">
+                    <form #editQuestionForm="ngForm">
+                      <div class="form-group">
+                        <label for="content">Nombre</label>
+                        <input type="text" name="content" required [(ngModel)]="editQuestion.content" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="option1">Alternativa 1</label>
+                        <input type="text" name="option1" required [(ngModel)]="editQuestion.option1" class="form-control" />
+                      </div>
+
+
+                      <div class="form-group">
+                        <label for="option2">Alternativa 2</label>
+                        <input type="text" name="option2" required [(ngModel)]="editQuestion.option2" class="form-control" />
+                      </div>
+
+
+
+                      <div class="form-group">
+                        <label for="option3">Alternativa 3</label>
+                        <input type="text" name="option3" required [(ngModel)]="editQuestion.option3" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="option4">Alternativa 4</label>
+                        <input type="text" name="option4" required [(ngModel)]="editQuestion.option4" class="form-control" />
+                      </div>
+
+                      <div class="form-group">
+                        <label for="answer">Alternativa Correcta</label>
+                        <input type="text" name="answer" required [(ngModel)]="editQuestion.answer" class="form-control" />
+                      </div>
+                    </form>
+                  </div>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    id="closeEditQuestionModalButton">
+                    Cerrar
+                  </button>
+                  <button type="button" (click)="onUpdateQuestion()" [disabled]="editQuestionForm.invalid"
+                    class="btn btn-primary">
+                    Guardar cambios
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
