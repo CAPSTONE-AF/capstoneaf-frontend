@@ -12,7 +12,7 @@ export class AppComponent {
   constructor(public router: Router) {
     this.router.events.subscribe((event) => {
       if (event instanceof NavigationEnd) {
-        gtag('config', 'MEASUREMENT-ID', { 'page_path': event.urlAfterRedirects });
+        gtag('config', 'G-KWQ6R2DMCE', { 'page_path': event.urlAfterRedirects });
       }
     })
   }
